@@ -22,7 +22,7 @@ public class SimpleGrabSystem : MonoBehaviour
     private void Update()
     {
         // Execute logic only on button pressed
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Mouse X"))
         {
             // Check if player picked some item already
             if (pickedItem)
@@ -51,6 +51,28 @@ public class SimpleGrabSystem : MonoBehaviour
                 }
             }
         }
+        if (Input.GetButtonDown("Mouse X"))
+        {
+            var ray = characterCamera.ViewportPointToRay(Vector3.one * 0.5f);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 1.5f))
+            {
+                var interactable = hit.transform.GetComponent<doors>();
+
+                if (interactable)
+                {
+                    Interact(interactable);
+                }
+            }
+
+               
+            
+        }    
+    }
+    private void Interact(doors interacble)
+    {
+        Vector3 newPosition = new Vector3(0, 90, 0);
+        transform.position = newPosition;
     }
 
     /// <summary>
@@ -75,7 +97,6 @@ public class SimpleGrabSystem : MonoBehaviour
         item.transform.localEulerAngles = Vector3.zero;
 
     }
-
     /// <summary>
     /// Method for dropping item.
     /// </summary>
