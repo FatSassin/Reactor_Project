@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -51,25 +52,26 @@ public class SimpleGrabSystem : MonoBehaviour
                 }
             }
         }
-        if (Input.GetButtonDown("Mouse X"))
+        if (Input.GetButtonDown("Fire1"))
         {
             var ray = characterCamera.ViewportPointToRay(Vector3.one * 0.5f);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 1.5f))
-            {
+            Physics.Raycast(ray, out hit, 1.5f);
+
+
                 var interactable = hit.transform.GetComponent<doors>();
 
                 if (interactable)
                 {
                     Interact(interactable);
                 }
-            }
+            
 
                
             
         }    
     }
-    private void Interact(doors interacble)
+    private void Interact(doors interactable)
     {
         Vector3 newPosition = new Vector3(0, 90, 0);
         transform.position = newPosition;
