@@ -987,6 +987,7 @@ GameObject:
   - component: {fileID: 361210118}
   - component: {fileID: 361210117}
   - component: {fileID: 361210121}
+  - component: {fileID: 361210122}
   m_Layer: 0
   m_Name: robert
   m_TagString: Untagged
@@ -1088,6 +1089,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &361210122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361210116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f155188066f2c942b5ae99e510fb399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &364475647 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5194791976165883141, guid: 072ac2c6d2c144c47989587346f4c9f7, type: 3}
