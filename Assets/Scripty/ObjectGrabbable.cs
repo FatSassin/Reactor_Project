@@ -22,7 +22,12 @@ public class ObjectGrabbable : MonoBehaviour
     {
         if (GameObject != null)
         {
+            objectRigidbody.useGravity = false;
             objectRigidbody.MovePosition(GameObject.position);
+        }
+        else if(!objectRigidbody.useGravity)
+        {
+            //objectRigidbody.useGravity = true;
         }
     }
 }
