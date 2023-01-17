@@ -9,20 +9,37 @@ public class PlayerPickUpDrop : MonoBehaviour
     [SerializeField] private Transform GameObject;
     [SerializeField] private LayerMask pickUpLayerMask;
 
+    private ObjectGrabbable objectGrabbable;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            float pickUpDistance = 2f;
-            if (Physics.Raycast(CameraPos.position, CameraPos.forward, out RaycastHit raycastHit, pickUpDistance))
+            if (objectGrabbable == null)
             {
-                if (raycastHit.transform.TryGetComponent(out ObjectGrabbable objectGrabbable))
+                float pickUpDistance = 3f;
+                if (Physics.Raycast(CameraPos.position, CameraPos.forward, out RaycastHit raycastHit, pickUpDistance))
                 {
-                    objectGrabbable.Grab(GameObject);
+                    if (raycastHit.transform.TryGetComponent(out objectGrabbable))
+                    {
+                        objectGrabbable.Grab(GameObject);
+                    }
                 }
-            }
 
+            }
+            else
+            {
+                objectGrabbable.Drop();
+                objectGrabbable = null;
+            }
+        
+        
+        
         }
+            
+        
+    
+    
+    
     }
 
 
