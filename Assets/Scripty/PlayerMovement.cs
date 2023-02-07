@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     
     Rigidbody rb;
 
-
+    // No doubra, zjem zupem
 
     
     private void MyInput()
@@ -50,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = groundDrag;
         else
             rb.drag = 5;
+
+       
     }
     private void FixedUpdate()
     {
