@@ -5,35 +5,32 @@ using UnityEngine;
 public class ObjectGrabbable : MonoBehaviour
 {
     private Rigidbody objectRigidbody;
-    private Transform GameObject;
-
-
+    private Transform objectGrabPointTransform;
 
     private void Awake()
     {
         objectRigidbody = GetComponent<Rigidbody>();
     }
 
-    public void Grab(Transform GameObject)
+    public void Grab(Transform objectGrabPointTransform)
     {
-        this.GameObject = GameObject;
+        this.objectGrabPointTransform = objectGrabPointTransform;
         objectRigidbody.useGravity = false;
     }
+
     public void Drop()
     {
-        this.GameObject = null;
+        this.objectGrabPointTransform = null;
         objectRigidbody.useGravity = true;
-
-
     }
+
     private void FixedUpdate()
     {
-        if (GameObject != null)
+        if (objectGrabPointTransform != null)
         {
             float lerpSpeed = 10f;
-            Vector3 newPosition = Vector3.Lerp(transform.position, GameObject.position, Time.deltaTime * lerpSpeed);
+            Vector3 newPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position, Time.deltaTime * lerpSpeed);
             objectRigidbody.MovePosition(newPosition);
         }
-        
     }
 }

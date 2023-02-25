@@ -8,15 +8,15 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - pickable
   - Water
   - UI
   - UI-ELEMENTS
   - 
   - 
-  - 
+  - player
   - whatIsGround
-  - 
+  - ground
   - 
   - 
   - 

@@ -1,69 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public CharacterController controller;
 
-    [Header("Movent")]
-    public float moveSpeed;
-    public float groundDrag;
+    public float speed = 10f;
+    public float gravityForce = -9.81f;
 
+    public float normalHeight, crouchHeight;
 
-    [Header("Ground Check")]
-    public float playerHeight;
-    
-    public LayerMask whatIsGround;
-    public Transform orientation;
-    bool grounded;
+    Vector3 velocity;
+    bool isGrounded;
 
-    float horizontalInput;
-    float verticalInput;
-    
-    Vector3 moveDirection;
-    
-    Rigidbody rb;
-
-    // No doubra, zjem zupem
-
-    
-    private void MyInput()
-    {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-
-    }
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
-    }
-
-
-    // Update is called once per frame
     void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            controller.height = crouchHeight;
+        }
+        if (Input.GetKeyUp(KeyCode.C))
+        {
+            controller.height = normalHeight;
+        }
 
-        MyInput();
-        if (grounded)
-            rb.drag = groundDrag;
-        else
-            rb.drag = 5;
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
 
-       
-    }
-    private void FixedUpdate()
-    {
-        MovePlayer();
-    }
-    private void MovePlayer()
-    {
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        Vector3 move = transform.right * x + transform.forward * z;
 
+        controller.Move(move * speed * Time.deltaTime);
 
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        velocity.y += gravityForce * Time.deltaTime;
+
+        controller.Move(velocity * Time.deltaTime);
 
     }
 }
